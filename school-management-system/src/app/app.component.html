@@ -1,15 +1,18 @@
 <ng-container *ngIf="loggedIn; else loginBlock">
-  <div class="d-flex"  [ngStyle]="{ width: isExpanded ? '20%' : '10%' }" >
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div [ngStyle]="{ width: isCollapsed ? '3.5rem' : '9.5rem' }">
+      <app-navigator-left (toggleOperation)="toggleOperation($event)"></app-navigator-left>
+    </div>
 
-    <app-navigator-left></app-navigator-left>
-
-    <div  [ngStyle]="{ width: isExpanded ? '80%' : '90%' }">
+    <!-- Main Content -->
+    <div [ngStyle]="{ width: isCollapsed? 'calc(100% - 3.5rem)' : 'calc(100% - 9.5rem)' }">
       <app-navigator-top></app-navigator-top>
       <router-outlet></router-outlet>
     </div>
   </div>
-
 </ng-container>
+
 <ng-template #loginBlock>
   <app-login></app-login>
 </ng-template>

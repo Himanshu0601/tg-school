@@ -21,5 +21,8 @@ export class AppComponent {
   title = 'school-management-system';
 
   loggedIn : boolean = true;
-  isExpanded :boolean = false;
+  isCollapsed :boolean = false;
+  toggleOperation(e:boolean){
+    this.isCollapsed = e
+  }
 }

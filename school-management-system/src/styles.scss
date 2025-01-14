@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+$theme-bg: #343a40;
+$btn-bg: #495057;
+$theme-text-color: #ffffff;
+$theme-hover-color: #b3d8fd;
+
+.theme-bg{
+    background-color: $theme-bg;;
+}
+.btn-bg{
+    background-color: $btn-bg;
+}
