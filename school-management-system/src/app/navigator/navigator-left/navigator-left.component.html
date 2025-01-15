@@ -17,7 +17,7 @@
         <li *ngFor="let module of schoolModules | keyValue" class="menu-item"
             [class.has-children]="module.value.children.length > 0">
             <!-- Main Menu -->
-            <a class="menu-link" *ngIf="module.value.display">
+            <a class="menu-link" *ngIf="module.value.display" (click)="changeInternalView()">
                 <i class="bi {{module.value.icon}}"></i>
                 <span *ngIf="!isCollapsed">{{ module.value.name }}</span>
             </a>

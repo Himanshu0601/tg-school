@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { KeyValuePipe } from '../../pipes/key-value.pipe';
 import { CommonModule } from '@angular/common';
+import { UrlService } from '../../shared/url.service';
 
 @Component({
   selector: 'app-navigator-left',
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class NavigatorLeftComponent {
   isCollapsed = false;
+    constructor(private service_url: UrlService) { }
 
   @Output() toggleOperation = new EventEmitter
 
@@ -111,4 +113,7 @@ export class NavigatorLeftComponent {
     this.toggleOperation.emit(this.isCollapsed)
   }
 
+  changeInternalView(){
+    this.service_url.navigateTo('grid')
+  }
 }

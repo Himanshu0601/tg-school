@@ -12,7 +12,7 @@ import { NavigatorLeftComponent } from './navigator/navigator-left/navigator-lef
     CommonModule,
     LoginComponent,
     NavigatorTopComponent,
-    NavigatorLeftComponent
+    NavigatorLeftComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

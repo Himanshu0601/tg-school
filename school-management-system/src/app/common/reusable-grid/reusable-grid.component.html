@@ -1,0 +1,31 @@
+<table>
+  <thead>
+    <tr>
+      <ng-container *ngFor="let column of columns; let columnIndex = index">
+        <th>
+          <ng-template [ngTemplateOutlet]="column.headerTemplate || defaultHeader"
+                       [ngTemplateOutletContext]="{ column: column,columnIndex:columnIndex }"></ng-template>
+          <ng-template #defaultHeader>
+            {{ column.field }}
+          </ng-template>
+        </th>
+      </ng-container>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr *ngFor="let row of gridData; trackBy: trackByIndex" (click)="onRowClick(row)"> -->
+    <tr *ngFor="let row of gridData; let rowIndex = index; trackBy: trackByIndex" >
+      <ng-container *ngFor="let column of columns">
+        <td>
+          <ng-container *ngIf="column.cellTemplate; else defaultCell">
+            <ng-template [ngTemplateOutlet]="column.cellTemplate"
+                         [ngTemplateOutletContext]="{ dataItem: row ,rowIndex:rowIndex}"></ng-template>
+          </ng-container>
+          <ng-template #defaultCell>
+            {{ row[column.field] }}
+          </ng-template>
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>

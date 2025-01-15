@@ -1,0 +1,90 @@
+/* reusable-grid.component.scss */
+
+/* Basic grid styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Style for table headers */
+thead {
+  background-color: #f8f9fa;
+}
+
+th {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-weight: bold;
+  background-color: #e9ecef;
+}
+
+th strong {
+  color: #007bff;
+}
+
+/* Style for table rows */
+tbody {
+  background-color: #ffffff;
+}
+
+td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  color: #333;
+  word-wrap: break-word;
+  font-size: 14px;
+}
+
+td span {
+  color: #495057;
+}
+
+/* Hover effect on rows */
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Styling for column headers */
+th,
+td {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Adjust width for columns */
+th:first-child, td:first-child {
+  width: 200px;
+}
+
+th:last-child, td:last-child {
+  width: 150px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  table {
+    font-size: 12px;
+  }
+  th,
+  td {
+    padding: 8px;
+  }
+}
+
+/* Styling for empty state (No Data) */
+.no-data {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #888;
+}
+
+/* Optional: Styling for table container */
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 20px 0;
+}
