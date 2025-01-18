@@ -16,7 +16,7 @@ export class NavigatorLeftComponent {
   isCollapsed = false;
     constructor(private service_url: UrlService) { }
 
-  @Output() toggleOperation = new EventEmitter
+  @Output() toggleOperation = new EventEmitter()
 
   schoolModules = {
     Dashboard: {

@@ -14,5 +14,5 @@
 </ng-container>
 
 <ng-template #loginBlock>
-  <app-login></app-login>
+  <app-login (loginSuccess)="loginOperation($event)"></app-login>
 </ng-template>

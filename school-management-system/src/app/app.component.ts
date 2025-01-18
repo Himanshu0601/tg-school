@@ -1,9 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoginComponent } from './admin/auth/login/login.component';
 import { NavigatorTopComponent } from './navigator/navigator-top/navigator-top.component';
 import { NavigatorLeftComponent } from './navigator/navigator-left/navigator-left.component';
+import { environment } from '../environment/environment';
+import { SenderService } from './shared/sender.service';
+import { DataService } from './shared/data.service';
+import { AuthService } from './shared/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +21,45 @@ import { NavigatorLeftComponent } from './navigator/navigator-left/navigator-lef
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'school-management-system';
 
-  loggedIn : boolean = true;
-  isCollapsed :boolean = false;
-  toggleOperation(e:boolean){
+  constructor(
+    private service_sender: SenderService,
+    private service_data: DataService,
+       private service_auth: AuthService,
+  ) { }
+
+  ngOnInit(): void {
+    this.loggedIn = this.service_auth.isAuthenticated()
+    if (this.loggedIn) {
+      this.getUser();
+    }
+  }
+  getUser() {
+    let formUrl = environment.baseUrl + '/user/getUser';
+    let formData = {
+      id: sessionStorage.getItem('UserId')
+    };
+
+    this.service_sender.makeGetSeverCall(formUrl, formData).subscribe({
+      next: (response: any) => {
+        this.service_data.userDto = response.result;
+        sessionStorage.setItem('UserId', response.result._id);
+      },
+      error: (error) => {
+
+      }
+    })
+  }
+
+  loggedIn: boolean = false;
+  isCollapsed: boolean = false;
+  toggleOperation(e: boolean) {
     this.isCollapsed = e
+  }
+
+  loginOperation(e: boolean) {
+    this.loggedIn = e
   }
 }
