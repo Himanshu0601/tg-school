@@ -44,8 +44,8 @@ export class AppComponent implements OnInit {
 
     this.service_sender.makeGetSeverCall(formUrl, formData).subscribe({
       next: (response: any) => {
-        this.service_data.userDto = response.result;
-        sessionStorage.setItem('UserId', response.result._id);
+        this.service_data.userDto = response[0];
+        sessionStorage.setItem('UserId',  this.service_data.userDto._id);
       },
       error: (error) => {
 
