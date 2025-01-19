@@ -4,9 +4,17 @@ $btn-bg: #495057;
 $theme-text-color: #ffffff;
 $theme-hover-color: #b3d8fd;
 
-.theme-bg{
-    background-color: $theme-bg;;
+.theme-bg {
+    background-color: $theme-bg;
+    ;
 }
-.btn-bg{
+
+.btn-bg {
     background-color: $btn-bg;
+}
+
+.inner-right-panel {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
 }

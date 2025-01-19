@@ -5,11 +5,12 @@
   left: 0;
   color: white;
   z-index: 99999;
+
   .toggle-button {
     position: absolute;
     top: 10px;
     right: -15px;
- 
+
     border: none;
     border-radius: 50%;
     color: white;
@@ -20,6 +21,7 @@
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
     &:hover {
       background-color: #1abc9c;
     }
@@ -63,17 +65,24 @@
         &:hover {
           background-color: #1abc9c;
         }
+
+      }
+
+      .active {
+        background-color: #1abc9c;
       }
 
       .submenu {
         list-style: none;
         position: absolute;
         top: 0;
-        left: 100%; /* Dropdown opens to the right */
+        left: 100%;
+        /* Dropdown opens to the right */
         background-color: #495057;
         padding: 10px 0;
         margin: 0;
-        display: none; /* Initially hidden */
+        display: none;
+        /* Initially hidden */
         border-radius: 5px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
@@ -108,7 +117,7 @@
         }
       }
 
-      &:hover > .submenu {
+      &:hover>.submenu {
         display: block;
       }
     }

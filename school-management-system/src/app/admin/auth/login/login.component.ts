@@ -54,10 +54,10 @@ export class LoginComponent {
     this.service_sender.makePostSeverCall(formUrl, formData).subscribe({
       next: (response: any) => {
         this.service_data.userDto = response.result;
-        this.service_auth.setCookie('authToken',response.token); 
-        sessionStorage.setItem('UserId', response.result._id);
+        this.service_auth.setToken('authToken',response.token); 
+        this.service_auth.setToken('UserId',response.result._id); 
         this.loginSuccess.emit(true)
-        this.service_url.navigateTo('grid')
+        this.service_url.navigateTo('students/details')
       },
       error: (error) => {
 

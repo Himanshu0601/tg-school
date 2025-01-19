@@ -1,4 +1,4 @@
-<ng-container *ngIf="loggedIn; else loginBlock">
+<ng-container *ngIf="loggedIn && !is_api_call_pending;">
   <div class="d-flex">
     <!-- Sidebar -->
     <div [ngStyle]="{ width: isCollapsed ? '3.5rem' : '9.5rem' }">
@@ -13,6 +13,6 @@
   </div>
 </ng-container>
 
-<ng-template #loginBlock>
+<ng-container *ngIf="!loggedIn">
   <app-login (loginSuccess)="loginOperation($event)"></app-login>
-</ng-template>
+</ng-container>

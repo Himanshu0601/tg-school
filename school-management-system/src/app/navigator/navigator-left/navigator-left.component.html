@@ -15,9 +15,9 @@
     <ul class="sidebar-menu">
         <!-- Iterate through schoolModules -->
         <li *ngFor="let module of schoolModules | keyValue" class="menu-item"
-            [class.has-children]="module.value.children.length > 0">
+            [class.has-children]="module.value.children.length > 0"  >
             <!-- Main Menu -->
-            <a class="menu-link" *ngIf="module.value.display" (click)="changeInternalView()">
+            <a [class.active]="currentRoute.includes(module.value.route)" class="menu-link" *ngIf="module.value.display" (click)="changeInternalView(module.value.route)">
                 <i class="bi {{module.value.icon}}"></i>
                 <span *ngIf="!isCollapsed">{{ module.value.name }}</span>
             </a>

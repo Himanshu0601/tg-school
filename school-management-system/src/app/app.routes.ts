@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-    { path: 'grid',  loadComponent: () => import('./dashboard/grid/grid.component').then(m=>m.GridComponent) }
+    { path: 'students/details',  loadComponent: () => import('./students/students.component').then(m=>m.StudentsComponent) }
 ];

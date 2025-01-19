@@ -4,6 +4,7 @@ import { ReusableGridComponent } from './reusable-grid.component';
 import { ReusableGridColumnComponent } from './reusable-grid-column/reusable-grid-column.component';
 import { ReusableGridHeaderTemplateDirective } from './directives/reusable-grid-header-template.directive';
 import { ReusableGridCellTemplateDirective } from './directives/reusable-grid-cell-template.directive';
+import { ReusableGridNodataDirective } from './directives/reusable-grid-nodata.directive';
 
 
 
@@ -13,6 +14,7 @@ import { ReusableGridCellTemplateDirective } from './directives/reusable-grid-ce
     ReusableGridColumnComponent,
     ReusableGridHeaderTemplateDirective,
     ReusableGridCellTemplateDirective,
+    ReusableGridNodataDirective
 
   ],
   imports: [
@@ -22,7 +24,8 @@ import { ReusableGridCellTemplateDirective } from './directives/reusable-grid-ce
     ReusableGridComponent,
     ReusableGridColumnComponent,
     ReusableGridHeaderTemplateDirective,
-    ReusableGridCellTemplateDirective
+    ReusableGridCellTemplateDirective,
+    ReusableGridNodataDirective
   ]
 })
 export class ReusableGridModule { }

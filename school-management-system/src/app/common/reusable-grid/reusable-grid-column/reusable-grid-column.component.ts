@@ -9,6 +9,7 @@ import { ReusableGridCellTemplateDirective } from '../directives/reusable-grid-c
 })
 export class ReusableGridColumnComponent implements AfterContentInit {
   @Input() field!: string;
+  @Input() title!: string;
   @Input() headerTemplate?: TemplateRef<any>;
   @Input() cellTemplate?: TemplateRef<{ dataItem: any,rowIndex:Number }>;
 

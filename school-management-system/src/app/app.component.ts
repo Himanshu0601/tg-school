@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   constructor(
     private service_sender: SenderService,
     private service_data: DataService,
-       private service_auth: AuthService,
+    private service_auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +36,10 @@ export class AppComponent implements OnInit {
       this.getUser();
     }
   }
+
+  is_api_call_pending = true
   getUser() {
+    this.is_api_call_pending = true
     let formUrl = environment.baseUrl + '/user/getUser';
     let formData = {
       id: sessionStorage.getItem('UserId')
@@ -45,7 +48,8 @@ export class AppComponent implements OnInit {
     this.service_sender.makeGetSeverCall(formUrl, formData).subscribe({
       next: (response: any) => {
         this.service_data.userDto = response[0];
-        sessionStorage.setItem('UserId',  this.service_data.userDto._id);
+        this.is_api_call_pending = false
+        sessionStorage.setItem('UserId', this.service_data.userDto._id);
       },
       error: (error) => {
 
@@ -61,5 +65,6 @@ export class AppComponent implements OnInit {
 
   loginOperation(e: boolean) {
     this.loggedIn = e
+    this.is_api_call_pending = false
   }
 }
