@@ -2,9 +2,10 @@
   width: 100%;
   border-collapse: collapse;
   font-family: 'Arial', sans-serif;
-  margin-top: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 
   .grid-header {
     background-color: #460707;
