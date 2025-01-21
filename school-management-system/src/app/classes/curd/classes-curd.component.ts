@@ -3,6 +3,7 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule
 import { SenderService } from '../../shared/sender.service';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environment/environment';
+import { NotificationService } from '../../notification/notification.service';
 
 @Component({
   selector: 'app-classes-curd',
@@ -27,6 +28,7 @@ export class ClassesCurdComponent {
   constructor(
     private fb: FormBuilder,
     private service_sender: SenderService,
+    private notificationService: NotificationService
   ) {
 
     this.classForm = this.fb.group({
@@ -106,6 +108,7 @@ export class ClassesCurdComponent {
     }
     this.service_sender.makePostSeverCall(formUrl, formData).subscribe({
       next: (response: any) => {
+        this.notificationService.notifier('success',"New class added successfully.");
         this.toolbarOperation.emit({ action_type: 'created', data: response })
       },
       error: (error) => {
@@ -128,7 +131,8 @@ export class ClassesCurdComponent {
     }
     this.service_sender.makePutSeverCall(formUrl, formData).subscribe({
       next: (response: any) => {
-        this.selectedDataItem = response
+        this.selectedDataItem = response;
+        this.notificationService.notifier('success',"Class updated successfully.");
         this.toolbarOperation.emit({ action_type: 'updated', data: response })
       },
       error: (error) => {

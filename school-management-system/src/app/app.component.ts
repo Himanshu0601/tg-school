@@ -8,6 +8,7 @@ import { environment } from '../environment/environment';
 import { SenderService } from './shared/sender.service';
 import { DataService } from './shared/data.service';
 import { AuthService } from './shared/auth.service';
+import { NotificationComponent } from './notification/notification/notification.component';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import { AuthService } from './shared/auth.service';
     LoginComponent,
     NavigatorTopComponent,
     NavigatorLeftComponent,
+    NotificationComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
