@@ -18,6 +18,9 @@ export class SenderService {
   makePostSeverCallWithHeaders(formUrl: string, formData: any,headers:any) {
     return this.http.post(formUrl,formData, headers)
   }
+  makePutSeverCall(formUrl: string, formData: any) {
+    return this.http.put(formUrl,formData)
+  }
   makeGetSeverCallWithHeaders(formUrl: string, formData: any,headers:any) {
     return this.http.post(formUrl,{ params: formData,headers })
   }
