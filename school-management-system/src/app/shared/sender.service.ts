@@ -12,6 +12,9 @@ export class SenderService {
   makeGetSeverCall(formUrl: string, formData: any) {
     return this.http.get(formUrl, { params: formData })
   }
+  makeDeleteSeverCall(formUrl: string, formData: any) {
+    return this.http.delete(formUrl, { params: formData })
+  }
   makePostSeverCall(formUrl: string, formData: any) {
     return this.http.post(formUrl,formData, {})
   }

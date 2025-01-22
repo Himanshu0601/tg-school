@@ -29,7 +29,7 @@ export class ClassesCurdComponent {
   constructor(
     private fb: FormBuilder,
     private service_sender: SenderService,
-    private notification_ervice: NotificationService,
+    private notification_service: NotificationService,
     private loader_service: LoaderService,
 
 
@@ -114,7 +114,7 @@ export class ClassesCurdComponent {
     this.service_sender.makePostSeverCall(formUrl, formData).subscribe({
       next: (response: any) => {
         this.loader_service.loadingStop("classCurd")
-        this.notification_ervice.notifier('success', "New class added successfully.");
+        this.notification_service.notifier('success', "New class added successfully.");
         this.toolbarOperation.emit({ action_type: 'created', data: response })
       },
       error: (error) => {
@@ -140,7 +140,7 @@ export class ClassesCurdComponent {
       next: (response: any) => {
         this.loader_service.loadingStop("classCurd");
         this.selectedDataItem = response;
-        this.notification_ervice.notifier('error', "Class updated successfully.");
+        this.notification_service.notifier('success', "Class updated successfully.");
         this.toolbarOperation.emit({ action_type: 'updated', data: response })
       },
       error: (error) => {

@@ -5,6 +5,7 @@ import { SenderService } from '../../shared/sender.service';
 import { environment } from '../../../environment/environment';
 import { MsgBoxService } from '../../services/msg-box.service';
 import { LoaderService } from '../../shared/loader.service';
+import { NotificationService } from '../../notification/notification.service';
 
 @Component({
   selector: 'app-classes-grid',
@@ -20,6 +21,7 @@ export class ClassesGridComponent implements OnInit {
     private service_sender: SenderService,
     private service_msg: MsgBoxService,
     private service_loader: LoaderService,
+    private notification_service: NotificationService,
   ) {
 
   }
@@ -49,8 +51,8 @@ export class ClassesGridComponent implements OnInit {
   getClasses() {
 
     let formUrl = environment.baseUrl + '/class/getAll';
-    this.service_loader.loadingStart("class_grid","Please wait.")
-    
+    this.service_loader.loadingStart("class_grid", "Please wait.")
+
     this.service_sender.makeGetSeverCall(formUrl, {}).subscribe({
       next: (response: any) => {
         this.service_loader.loadingStop("class_grid")
@@ -67,18 +69,31 @@ export class ClassesGridComponent implements OnInit {
   }
 
   onDelete(item: any) {
-    this.service_msg.confirm('Action Required', 'Choose your action:', [
-      { label: 'Save', style: 'primary', value: 'save' },
+    this.service_msg.confirm('Delete', 'Selected item will lost permanently. Do you want to continue?', [
       { label: 'Delete', style: 'danger', value: 'delete' },
       { label: 'Cancel', style: 'secondary', value: 'cancel' },
     ])
-      .then((confirmed) => {
-        if (confirmed) {
-          console.log('Item deleted!');
-        } else {
-          console.log('Delete action canceled.');
+      .then((text) => {
+
+        if (text == "delete") {
+          this.delete_inner(item)
         }
       });
+  }
+  delete_inner(item: any) {
+    let formUrl = environment.baseUrl + `/class/delete/${item._id}`;
+    this.service_loader.loadingStart("class_grid", "Please wait.")
+
+    this.service_sender.makeDeleteSeverCall(formUrl, {}).subscribe({
+      next: (response: any) => {
+        this.service_loader.loadingStop("class_grid")
+        this.notification_service.notifier('success', "Class deleted successfully.");
+        this.datasource_classes = this.datasource_classes.filter(val => val._id != item._id)
+      },
+      error: (error) => {
+        this.service_loader.loadingStop("class_grid")
+      }
+    })
   }
 
 }
