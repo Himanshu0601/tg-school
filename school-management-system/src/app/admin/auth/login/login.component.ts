@@ -6,6 +6,8 @@ import { DataService } from '../../../shared/data.service';
 import { environment } from '../../../../environment/environment';
 import { UrlService } from '../../../shared/url.service';
 import { AuthService } from '../../../shared/auth.service';
+import { NotificationService } from '../../../notification/notification.service';
+import { LoaderService } from '../../../shared/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -25,9 +27,9 @@ export class LoginComponent {
     private fb: FormBuilder,
     private service_sender: SenderService,
     private service_data: DataService,
-    private service_url: UrlService,
+    private service_loader: LoaderService,
     private service_auth: AuthService,
-
+    private service_notification: NotificationService,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required]],
@@ -49,18 +51,19 @@ export class LoginComponent {
       password: this.loginForm.controls['password'].value,
       username: this.loginForm.controls['email'].value
     };
-
+    this.service_loader.loadingStart("LoginBox","Please wait.")
 
     this.service_sender.makePostSeverCall(formUrl, formData).subscribe({
       next: (response: any) => {
+        this.service_loader.loadingStop("LoginBox")
         this.service_data.userDto = response.result;
         this.service_auth.setToken('authToken',response.token); 
         this.service_auth.setToken('UserId',response.result._id); 
         this.loginSuccess.emit(true)
-        this.service_url.navigateTo('students/details')
       },
       error: (error) => {
-
+        this.service_loader.loadingStop("LoginBox")
+        this.service_notification.notifier('error',error.error.message)
       }
     })
 

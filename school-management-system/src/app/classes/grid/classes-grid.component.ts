@@ -3,6 +3,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ReusableGridModule } from '../../common/reusable-grid/reusable-grid.module';
 import { SenderService } from '../../shared/sender.service';
 import { environment } from '../../../environment/environment';
+import { MsgBoxService } from '../../services/msg-box.service';
+import { LoaderService } from '../../shared/loader.service';
 
 @Component({
   selector: 'app-classes-grid',
@@ -16,6 +18,8 @@ import { environment } from '../../../environment/environment';
 export class ClassesGridComponent implements OnInit {
   constructor(
     private service_sender: SenderService,
+    private service_msg: MsgBoxService,
+    private service_loader: LoaderService,
   ) {
 
   }
@@ -31,8 +35,8 @@ export class ClassesGridComponent implements OnInit {
   }
   @Input('data_to_update') set data_to_update({ dataItem }: any) {
     if (dataItem) {
-      this.datasource_classes = this.datasource_classes.map(item=>{
-        if(item._id == dataItem._id){
+      this.datasource_classes = this.datasource_classes.map(item => {
+        if (item._id == dataItem._id) {
           item = dataItem
         }
         return item;
@@ -45,14 +49,15 @@ export class ClassesGridComponent implements OnInit {
   getClasses() {
 
     let formUrl = environment.baseUrl + '/class/getAll';
-
-
+    this.service_loader.loadingStart("class_grid","Please wait.")
+    
     this.service_sender.makeGetSeverCall(formUrl, {}).subscribe({
       next: (response: any) => {
+        this.service_loader.loadingStop("class_grid")
         this.datasource_classes = response
       },
       error: (error) => {
-
+        this.service_loader.loadingStop("class_grid")
       }
     })
   }
@@ -62,7 +67,18 @@ export class ClassesGridComponent implements OnInit {
   }
 
   onDelete(item: any) {
-
+    this.service_msg.confirm('Action Required', 'Choose your action:', [
+      { label: 'Save', style: 'primary', value: 'save' },
+      { label: 'Delete', style: 'danger', value: 'delete' },
+      { label: 'Cancel', style: 'secondary', value: 'cancel' },
+    ])
+      .then((confirmed) => {
+        if (confirmed) {
+          console.log('Item deleted!');
+        } else {
+          console.log('Delete action canceled.');
+        }
+      });
   }
 
 }

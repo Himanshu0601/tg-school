@@ -9,6 +9,7 @@ import { SenderService } from './shared/sender.service';
 import { DataService } from './shared/data.service';
 import { AuthService } from './shared/auth.service';
 import { NotificationComponent } from './notification/notification/notification.component';
+import { NotificationService } from './notification/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
     private service_sender: SenderService,
     private service_data: DataService,
     private service_auth: AuthService,
+    private service_notification: NotificationService,
   ) { }
 
   ngOnInit(): void {
@@ -49,12 +51,13 @@ export class AppComponent implements OnInit {
 
     this.service_sender.makeGetSeverCall(formUrl, formData).subscribe({
       next: (response: any) => {
+
         this.service_data.userDto = response[0];
         this.is_api_call_pending = false
         sessionStorage.setItem('UserId', this.service_data.userDto._id);
       },
       error: (error) => {
-
+        this.service_notification.notifier('error',error.error.message)
       }
     })
   }

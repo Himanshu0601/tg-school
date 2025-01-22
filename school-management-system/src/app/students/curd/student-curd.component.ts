@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { environment } from '../../../environment/environment';
 import { SenderService } from '../../shared/sender.service';
 import { ReusableGridModule } from '../../common/reusable-grid/reusable-grid.module';
+import { LoaderService } from '../../shared/loader.service';
 
 @Component({
   selector: 'app-student-curd',
@@ -44,6 +45,7 @@ export class StudentCurdComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service_sender: SenderService,
+    private service_loader: LoaderService,
   ) {
     this.studentForm = this.fb.group({
       admissionNumber: [{ value: '', disabled: true }, [Validators.required]],
@@ -76,16 +78,17 @@ export class StudentCurdComponent implements OnInit {
   getLastAdmissionNumber() {
 
     let formUrl = environment.baseUrl + '/student/getLastAdmissionNumber';
-
-
+    this.service_loader.loadingStart("student_curd","Please wait.")
+    
     this.service_sender.makeGetSeverCall(formUrl, {}).subscribe({
       next: (response: any) => {
+        this.service_loader.loadingStop("student_curd")
         this.studentForm.patchValue({
           admissionNumber: response.lastGeneratedAdmissionNumber,
         });
       },
       error: (error) => {
-
+        this.service_loader.loadingStop("student_curd")
       }
     })
   }
@@ -93,13 +96,14 @@ export class StudentCurdComponent implements OnInit {
 
     let formUrl = environment.baseUrl + '/class/getAll';
 
-
+    this.service_loader.loadingStart("student_curd","Please wait.")
     this.service_sender.makeGetSeverCall(formUrl, {}).subscribe({
       next: (response: any) => {
+        this.service_loader.loadingStop("student_curd")
         this.classes = response;
       },
       error: (error) => {
-
+        this.service_loader.loadingStop("student_curd")
       }
     })
   }
@@ -107,13 +111,14 @@ export class StudentCurdComponent implements OnInit {
 
     let formUrl = environment.baseUrl + '/fee/feestructure/getAll';
 
-
+    this.service_loader.loadingStart("student_curd","Please wait.")
     this.service_sender.makeGetSeverCall(formUrl, {}).subscribe({
       next: (response: any) => {
+        this.service_loader.loadingStop("student_curd")
         this.feeStructure = response;
       },
       error: (error) => {
-
+        this.service_loader.loadingStop("student_curd")
       }
     })
   }
@@ -144,8 +149,8 @@ export class StudentCurdComponent implements OnInit {
 
       const reader = new FileReader();
       reader.onload = () => {
-        this.photoPreview = reader.result; // Display the preview
-        this.studentForm.get('studentPhoto')?.setValue(file); // Update form control value
+        this.photoPreview = reader.result; 
+        this.studentForm.get('studentPhoto')?.setValue(file); 
       };
       reader.readAsDataURL(file);
     }

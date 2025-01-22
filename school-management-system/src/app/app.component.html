@@ -1,5 +1,5 @@
 <ng-container *ngIf="loggedIn && !is_api_call_pending;">
-  <div class="d-flex">
+  <div id="navPanel" class="d-flex">
     <!-- Sidebar -->
     <div [ngStyle]="{ width: isCollapsed ? '3.5rem' : '9.5rem' }">
       <app-navigator-left (toggleOperation)="toggleOperation($event)"></app-navigator-left>

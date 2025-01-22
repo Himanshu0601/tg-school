@@ -4,6 +4,7 @@ import { SenderService } from '../../shared/sender.service';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environment/environment';
 import { NotificationService } from '../../notification/notification.service';
+import { LoaderService } from '../../shared/loader.service';
 
 @Component({
   selector: 'app-classes-curd',
@@ -28,7 +29,10 @@ export class ClassesCurdComponent {
   constructor(
     private fb: FormBuilder,
     private service_sender: SenderService,
-    private notificationService: NotificationService
+    private notification_ervice: NotificationService,
+    private loader_service: LoaderService,
+
+
   ) {
 
     this.classForm = this.fb.group({
@@ -106,13 +110,15 @@ export class ClassesCurdComponent {
       "name": this.classForm.value.name,
       "sections": selectedSections
     }
+    this.loader_service.loadingStart("classCurd","Please wait.")
     this.service_sender.makePostSeverCall(formUrl, formData).subscribe({
       next: (response: any) => {
-        this.notificationService.notifier('success',"New class added successfully.");
+        this.loader_service.loadingStop("classCurd")
+        this.notification_ervice.notifier('success', "New class added successfully.");
         this.toolbarOperation.emit({ action_type: 'created', data: response })
       },
       error: (error) => {
-
+        this.loader_service.loadingStop("classCurd")
       }
     })
   }
@@ -129,14 +135,16 @@ export class ClassesCurdComponent {
       "sections": selectedSections,
 
     }
+    this.loader_service.loadingStart("classCurd", "Please wait ...");
     this.service_sender.makePutSeverCall(formUrl, formData).subscribe({
       next: (response: any) => {
+        this.loader_service.loadingStop("classCurd");
         this.selectedDataItem = response;
-        this.notificationService.notifier('success',"Class updated successfully.");
+        this.notification_ervice.notifier('error', "Class updated successfully.");
         this.toolbarOperation.emit({ action_type: 'updated', data: response })
       },
       error: (error) => {
-
+        this.loader_service.loadingStop("classCurd");
       }
     })
   }
