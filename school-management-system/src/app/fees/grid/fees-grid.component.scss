@@ -1,0 +1,57 @@
+
+.accordion-button {
+    box-shadow: none !important; 
+    background-color: transparent !important; 
+    padding-right: 1.5rem; 
+  }
+  
+  
+  .accordion-button::after {
+    content: none; 
+  }
+  
+  .header-content {
+    background-color: #f0f0f0; 
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  
+  .accordion-header {
+    padding: 0;
+    margin-bottom: 0; 
+  }
+  
+  
+  .accordion-button:not(.collapsed) {
+    background-color: transparent !important; 
+  }
+  
+  
+  .accordion-collapse.collapse.show + .accordion-header .header-content {
+    background-color: #e0e0e0; 
+  }
+  
+  .accordion-body {
+    padding: 10px;
+  }
+  
+
+  .no-data-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .no-data-message {
+    font-size: 18px;
+    font-weight: 600;
+    color: #888;
+    text-align: center;
+  }

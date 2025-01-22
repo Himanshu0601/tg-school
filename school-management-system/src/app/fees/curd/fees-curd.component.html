@@ -1,0 +1,29 @@
+<div class="mx-2 form-container" id="classCurd">
+    <!-- Header -->
+    <div class="d-flex w-100 justify-content-between align-items-center py-2 bottom_border">
+        <h6>{{heaeder_name}}</h6>
+        <div class="close-btn" (click)="close()">
+            <i class="bi bi-x"></i>
+        </div>
+    </div>
+
+    <!-- Form Body -->
+    <div class="form-body">
+        <form [formGroup]="classForm">
+
+
+
+        </form>
+    </div>
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <div class="btn-panel d-flex justify-content-end py-2">
+        <button class="btn btn-primary" [disabled]="classForm.invalid" (click)="submitForm()">{{button}}</button>
+    </div>
+</div>

@@ -74,8 +74,8 @@ export class NavigatorLeftComponent implements OnInit {
       route: '/classes',
       display: false,
       children: [
-        { name: 'Timetable', route: '/classes/timetable', icon: 'bi-calendar', display: true, },
-        { name: 'Subjects', route: '/classes/subjects', icon: 'bi-book', display: true, },
+        // { name: 'Timetable', route: '/classes/timetable', icon: 'bi-calendar', display: true, },
+        // { name: 'Subjects', route: '/classes/subjects', icon: 'bi-book', display: true, },
       ],
     },
     Examinations: {
@@ -89,13 +89,13 @@ export class NavigatorLeftComponent implements OnInit {
       ],
     },
     Fees: {
-      name: 'Fees',
+      name: 'fees',
       icon: 'bi-currency-dollar',
       route: '/fees',
       display: false,
       children: [
-        { name: 'Collection', route: '/fees/collection', icon: 'bi-wallet', display: true, },
-        { name: 'Due List', route: '/fees/due-list', icon: 'bi-list-check', display: true, },
+        // { name: 'Collection', route: '/fees/collection', icon: 'bi-wallet', display: true, },
+        // { name: 'Due List', route: '/fees/due-list', icon: 'bi-list-check', display: true, },
       ],
     },
     Library: {
