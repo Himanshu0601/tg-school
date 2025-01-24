@@ -31,7 +31,7 @@
     </div>
 </div>
 
-<div class="no-data-container">
+<div *ngIf="datasource_fees.length == 0" class="no-data-container">
     <div class="no-data-message">No Fees Available.</div>
 
 </div>
